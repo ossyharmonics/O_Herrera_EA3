@@ -41,32 +41,33 @@ def buscar_reserva():
         if nombre == "":
             print("'Nombre' no puede estar vacío.")
             return
+        
         for reserva in reservas:
             if reserva['nombre'] == nombre:
-                print(f"Reserva encontrada: {nombre}, Cantidad reservada: {reserva['cantidad']}")
-
-                if reserva["vip"] == "no":
-                    respuesta = input("¿Desea pagar un adicional por reserva VIP? (s/n)").lower()
+                print(f"Reserva encontrada: {nombre}. \nCantidad reservada: {reserva['cantidad']}")
+                if reserva["vip"].lower() == "no":
+                    respuesta = input("¿Desea pagar un adicional para una reserva VIP.\n podrá reservar 2 pares? (s/n): ").lower()
                     if respuesta == "s":
                         total_reservas_actual = sum(r["cantidad"] for r in reservas)
                         if total_reservas_actual + 1 <= max_reservas:
                             reserva["vip"] = "si"
                             reserva["cantidad"] = 2
-                            print("¡Has actualizado a VIP! Lo que te permite reservar 2 pares.")
+                            print("¡Has actualizado a VIP! pares reservados: 2 \n\n")
                         else:
-                            print("No hay stock suficiente para reserva VIP.")                               
-            return
-        print(f"Lo sentimos. {nombre} no tiene reservas registradas.")
-    except Exception as e:
-        print(f"Ha ocurrido un error. No hemos podido consultar la reserva.{e}")
+                            print("No hay stock suficiente para reserva VIP.") 
+                return
 
+        print(f"Lo sentimos. {nombre} no tiene reservas registradas.\n\n")        
+    except Exception as e:
+        print(f"Ha ocurrido un error. No hemos podido consultar la reserva. {e}")
+        
         
 def ver_stock():
     try:
         total_reservas = sum(i["cantidad"] for i in reservas)
         restante = max_reservas - total_reservas
-        print(f"Total de zapatillas reservadas: {total_reservas}")
-        print(f"Zapatillas disponibles para reservar: {restante}")
+        print(f"\nTotal de pares de zapatillas reservadas: {total_reservas}")
+        print(f"Pares disponibles para reservar: {restante}\n\n")
     except Exception as e:
         print(f"Ocurrió un error al mostrar el stock: {e}")
         
@@ -83,7 +84,7 @@ def main():
             elif opcion == 3:
                 ver_stock()
             elif opcion == 4:
-                print("Programa terminado...")
+                print("Programa terminado. ¡Hasta pronto!")
                 break
             else:
                 print("\nLa opción ingresada no está permitida.\n\n")               

@@ -90,11 +90,4 @@ def main():
                 print("\nLa opción ingresada no está permitida.\n\n")               
         except ValueError:
             print("\nDebes ingresar una opción válida.\n\n")
-             
 main()
-    
-    
-     
-   
-
-    
